@@ -1,0 +1,28 @@
+<!-- <ul>
+    <app-fils>
+        <span prenomContent> John </span>
+        <span nomContent> Wick </span>
+    </app-fils>
+    <app-fils>
+        <span prenomContent> Jack </span>
+        <span nomContent> Shephard </span>
+    </app-fils>
+    <app-fils>
+        <span prenomContent> James </span>
+        <span nomContent> Ford </span>
+    </app-fils>
+</ul>
+<li>
+    Je suis un fils : mon nom est
+    <ng-content select="[nomContent]">
+        </ng-content>
+        et mon pr´enom est
+        <ng-content select="[prenomContent]"></ng-content>
+</li> -->
+
+<ul>
+    <app-fils [ordre]="tab[0]" [villeNaissance]="sud"></app-fils>
+    <app-fils [ordre]="tab[1]" [villeNaissance]="nord"></app-fils>
+    <app-fils [ordre]="tab[2]" [villeNaissance]="capitale"></app-fils>
+</ul>
+<ng-content select="app-titre"></ng-content>

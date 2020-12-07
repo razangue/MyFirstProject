@@ -1,0 +1,84 @@
+<!-- <div class='container'>
+    <h2>Formulaire</h2>
+    <form [formGroup]='personneForm' (ngSubmit)=afficherTout()>
+
+        <div class='form-group'>
+            <label for='email'>Id:</label>
+            <input class='form-control' type='number' placeholder='Enter Id' name=id formControlName='id'>
+        </div>
+        <div *ngIf='id.invalid && (id.dirty || id.touched)'>
+            <div *ngIf='id.errors?.required'>L’identifiant est obligatoire</div>
+        </div>
+        <div class='form-group'>
+            <label for='email'>Nom:</label>
+            <input class='form-control' type='text' placeholder='Enter LastName' name=nom formControlName='nom'>
+        </div>
+        <div *ngIf='nom.invalid && (nom.dirty || nom.touched)'>
+            <div *ngIf='nom.errors?.required'>Le nom est obligatoire</div>
+            <div *ngIf='nom.errors?.pattern'>Premiere lettre en majuscule et min 3 lettres max 11</div>
+        </div>
+        <div class='form-group'>
+            <label for='email'>Prenom:</label>
+            <input class='form-control' type='text' placeholder='Enter FirstName' name=prenom formControlName='prenom'>
+        </div>
+        <div *ngIf='prenom.invalid && (prenom.dirty || prenom.touched)'>
+            <div *ngIf='prenom.errors?.required'>Le prenom est obligatoire</div>
+            <div *ngIf='prenom.errors?.erreur'>Premiere lettre en majuscule</div>
+        </div>
+        <button type='submit' [disabled]='!personneForm.valid'>Envoyer</button>
+        <div>
+            etat : {{ personneForm.status }}
+        </div>
+
+    </form>
+</div> -->
+<form [formGroup]='personneForm' (ngSubmit)='afficherTout()'>
+    <div>
+        Identifiant :
+        <input type='number' formControlName='id'>
+    </div>
+    <div>
+        Nom :
+        <input type='text' formControlName='nom'>
+    </div>
+    <div>
+        Prénom :
+        <input type='text' formControlName='prenom'>
+    </div>
+    <div formGroupName='adresse'>
+        <h3>Adresse</h3>
+        <div>
+            Rue :
+            <input type='text' formControlName='rue'>
+        </div>
+        <div>
+            Ville :
+            <input type='text' formControlName='ville'>
+        </div>
+        <div>
+            Code postal :
+            <input type='text' formControlName='codePostal'>
+        </div>
+    </div>
+    <div formArrayName='sports'>
+        <h3>Sports </h3>
+        <button type='button' (click)='ajouterSport()'>
+            Ajouter sport
+        </button>
+        <div *ngFor='let sport of sports.controls; let i=index'>
+            <div>
+                Sport :
+                <input type='text' [formControlName]='i'>
+            </div>
+        </div>
+    </div>
+    <button type='submit'>Envoyer</button>
+
+    <div *ngFor="let elt of personnes;">
+        {{ elt.id }} - {{ elt.nom }} - {{ elt.prenom }} 
+        <ol>
+            <li *ngFor="let subItem of elt.sports"> {{ subItem }} </li>
+       </ol>
+    </div>
+
+</form>

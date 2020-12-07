@@ -1,0 +1,116 @@
+<div style="text-align: center">
+        <h1>
+          Welcome to {{title}}!
+        </h1>
+      </div>
+      
+      <ul>
+        <li>Nom: {{personne.nom}}</li>
+        <li>Nom: {{personne.prenom}}</li>
+      </ul>
+      
+      <p>
+        {{direBonjour()}}
+      </p>
+      
+      <p [textContent]=title></p>
+      
+      <ul>
+        <li *ngFor="let elt of tab; let i = index; let isFirst = first">
+          {{ i }} : {{ elt }} : {{ isFirst }}
+        </li>
+      </ul>
+      
+      <ul>
+        <li *ngFor="let elt of tab; let i = index; let isEven = even">
+          {{ i }} : {{ elt }} : {{ isEven }}
+        </li>
+      </ul>
+      
+      <ul>
+        <li *ngFor="let elt of tab; let i = index; let isOdd = odd">
+          {{ i }} : {{ elt }} : {{ isOdd }}
+        </li>
+      </ul>
+      
+      
+      <ul>
+        <li *ngIf="tab[0] % 2 == 0">
+          {{ tab[0] }} est pair
+        </li>
+      </ul>
+      
+      <ul>
+        <ng-container *ngFor="let elt of tab">
+          <li *ngIf="elt % 2 != 0; else sinon">
+            {{ elt }} est impair
+          </li>
+          <ng-template #sinon>
+            <li>
+              {{ elt }} est pair
+            </li>
+          </ng-template>
+        </ng-container>
+      </ul>
+      
+      Les switch case
+      
+      <ul>
+        <ng-container *ngFor="let elt of tab">
+          <ng-container [ngSwitch]="true">
+            <li *ngSwitchCase="elt >= 0 && elt < 10">
+              {{ elt }} : 'echec'
+            </li>
+            <li *ngSwitchCase="elt >= 10 && elt < 13">
+              {{ elt }} : 'moyen'
+            </li>
+            <li *ngSwitchCase="elt >= 13 && elt < 15">
+              {{ elt }} : 'bien'
+            </li>
+            <li *ngSwitchCase="elt >= 15">
+              {{ elt }} : 'tres bien'
+            </li>
+            <li *ngSwitchDefault>
+              autre
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+      
+      <p [textContent]=nom [ngStyle]="{color:getColor(), backgroundColor:getBackgroundColor()}"></p>
+      
+      <p [ngStyle]="{color: getColor(), backgroundColor: getBackgroundColor()}">
+        {{ nom }}
+      </p>
+      
+      <p [ngClass]="{'rouge': nom == 'wick'}">
+        {{ nom }}
+        </p>
+        <p [ngClass]="{'rouge': nom == 'wick', 'bleu': nom!= 'wick'}">
+        {{ nom }}
+        </p>
+      
+      
+        <ul>
+          <ng-container *ngFor="let elt of tab">
+            <li *ngIf="elt % 2 != 0; else sinon" [ngClass]="['rouge']">
+              {{ elt }} est impair
+            </li>
+            <ng-template #sinon>
+              <li [ngClass]="['bleu']">
+                {{ elt }} est pair
+              </li>
+            </ng-template>
+          </ng-container>
+        </ul>
+      
+      
+        Les personnes
+        <ul>
+          <li *ngFor="let personne of personnes">
+            <div [ngClass]= "personne.number % 2 ===0 ? 'bleu': 'red'">
+              {{ personne.number}}  {{ personne.nom}}
+            </div>
+          </li>
+        </ul>
+        <app-stagiaire></app-stagiaire>

@@ -1,0 +1,23 @@
+<div *ngIf='personne'>
+    <form #monForm=ngForm (ngSubmit)=updatePersonne() >
+        <div>
+            Nom :
+            <input type=text name=nom [(ngModel)]=personne.nom required #nom='ngModel' [(disabled)]=!showDetail>
+        </div>
+        <div [hidden]='nom.valid || nom.pristine'>
+            Le nom est obligatoire
+        </div>
+        <div>
+            Prénom :
+            <input type=text name=prenom [(ngModel)]=personne.prenom required #prenom='ngModel' [(disabled)]=!showDetail>
+        </div>
+        <div [hidden]='prenom.valid || prenom.pristine'>
+            Le prenom est obligatoire
+        </div>
+        <div *ngIf=showDetail>
+            <button [disabled]=!monForm.valid>
+                Enregistrer
+            </button>
+        </div>
+    </form>
+</div>
